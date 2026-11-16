@@ -66,49 +66,10 @@
     select(osTabs.find((t) => t.dataset.os === guess) || osTabs[0]);
   }
 
-  // Hero board: sessions work, one stops to ask you something, you jump to it with ";", answer,
-  // and the rest finish. The tab's counts follow the cards, as they do in Orbit.
-  const board = $(".board");
-  if (board) {
-    const cards = $$(".card", board);
-    const counts = $("[data-counts]", board);
-    const hint = $(".hint-jump", board);
-    const COLOR = { working: "yellow", waiting: "red", unread: "blue", seen: "green" };
-    const tally = () => {
-      const n = {};
-      cards.forEach((c) => { n[c.dataset.state] = (n[c.dataset.state] || 0) + 1; });
-      counts.innerHTML = ["waiting", "working", "unread", "seen"].filter((s) => n[s])
-        .map((s) => `<b class="c-${COLOR[s]}">●${n[s]}</b>`).join("");
-    };
-    tally();
-    const initial = cards.map((c) => c.dataset.state);
-    const set = (i, state) => { cards[i].dataset.state = state; tally(); };
-    const sel = (i) => cards.forEach((c, j) => c.classList.toggle("sel", i === j));
-    const script = [
-      () => set(1, "waiting"),
-      () => hint.classList.add("lit"),
-      () => { sel(1); hint.classList.remove("lit"); },
-      () => set(1, "working"),
-      () => set(3, "unread"),
-      () => set(0, "unread"),
-      () => { sel(0); set(0, "seen"); },
-      () => set(1, "unread"),
-      () => set(2, "working"),
-      () => { initial.forEach((s, i) => { cards[i].dataset.state = s; }); sel(0); tally(); },
-    ];
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let step = 0, timer = 0, onScreen = false;
-    const tick = () => { script[step](); step = (step + 1) % script.length; };
-    const run = () => {
-      clearInterval(timer);
-      if (onScreen && !document.hidden && !still.matches) timer = setInterval(tick, 1700);
-    };
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; run(); }).observe(board);
-    }
-    document.addEventListener("visibilitychange", run);
-    still.addEventListener?.("change", run);
-  }
+  // Hero OS buttons open the matching install tab.
+  $$("[data-os-link]").forEach((a) => a.addEventListener("click", () => {
+    osTabs.find((t) => t.dataset.os === a.dataset.osLink)?.click();
+  }));
 
   // Home page: the nav item for the section on screen is marked.
   const sectionLinks = $$(".nav a[data-section]");

@@ -7,49 +7,38 @@
 {{header}}
 <main id="main">
 
-  <!-- Hero: the pitch on the left, a live session board on the right -->
+  <!-- Hero: centered pitch, one install command, the screen below -->
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <a class="release" href="{{repo}}/releases" rel="noopener"><span class="dot dot-green"></span>Version {{version}} is out</a>
-        <h1>Mission control for your Claude Code sessions.</h1>
-        <p class="lede">Run many Claude Code sessions across every project and git worktree, from one terminal. Each session gets a status dot, so you can see which one needs you without opening it. They keep running after you close Orbit.</p>
+    <div class="wrap hero-center">
+      <a class="release" href="{{repo}}/releases" rel="noopener"><span class="dot dot-green"></span>Version {{version}} is out</a>
+      <h1>Mission control for your <span class="grad">Claude Code</span> sessions.</h1>
+      <p class="lede">Run many Claude Code sessions across every project and git worktree, from one terminal. Each session gets a status dot, so you can see which one needs you without opening it. They keep running after you close Orbit.</p>
 
-        <div class="cmd" data-copy="curl -fsSL https://raw.githubusercontent.com/AmenAdem/Orbit/main/install.sh | sh">
-          <span class="prompt" aria-hidden="true">$</span>
-          <code>curl -fsSL https://raw.githubusercontent.com/AmenAdem/Orbit/main/install.sh | sh</code>
-          <button class="copy" type="button" aria-label="Copy install command">Copy</button>
-        </div>
-        <p class="cmd-note">For macOS and Linux. On Windows, run it inside WSL2.</p>
+      <ul class="dots-row" aria-label="Session status colours">
+        <li><span class="dot dot-yellow"></span>Working</li>
+        <li><span class="dot dot-red"></span>Needs you</li>
+        <li><span class="dot dot-blue"></span>Done, unread</li>
+        <li><span class="dot dot-green"></span>Done</li>
+      </ul>
 
-        <div class="ctas">
-          <a class="btn btn-primary" href="#install">Install guide</a>
-          <a class="btn btn-ghost" href="/docs/guide/">Read the docs</a>
-        </div>
+      <div class="cmd" data-copy="curl -fsSL https://raw.githubusercontent.com/AmenAdem/Orbit/main/install.sh | sh">
+        <span class="prompt" aria-hidden="true">$</span>
+        <code>curl -fsSL https://raw.githubusercontent.com/AmenAdem/Orbit/main/install.sh | sh</code>
+        <button class="copy" type="button" aria-label="Copy install command">Copy</button>
       </div>
 
-      <div class="board" role="img" aria-label="A sketch of Orbit's session board: project tabs with status counts, and session cards whose status dots change as the sessions work, wait for you, and finish">
-        <div class="board-tabs">
-          <span class="btab on">orbit-api <span class="btab-counts" data-counts></span></span>
-          <span class="btab">relay-cli <b class="c-red">●1</b></span>
-          <span class="btab">atlas-web <b class="c-blue">●2</b></span>
-        </div>
-        <div class="band"><span class="band-name">main</span><span class="band-rule"></span><span class="c-green">+3</span> <span class="c-red">−1</span></div>
-        <div class="cards">
-          <div class="card sel" data-state="working"><span class="dot"></span><b>Daemon startup profile</b><span class="card-meta"><span class="card-state"></span><span>ctx 75%</span></span></div>
-          <div class="card" data-state="working"><span class="dot"></span><b>Changelog by date</b><span class="card-meta"><span class="card-state"></span><span>ctx 64%</span></span></div>
-        </div>
-        <div class="band"><span class="band-name">feat/auth-tokens</span><span class="band-rule"></span><span class="c-faint">#57 open</span></div>
-        <div class="cards">
-          <div class="card" data-state="seen"><span class="dot"></span><b>Rotate refresh tokens</b><span class="card-meta"><span class="card-state"></span><span>ctx 41%</span></span></div>
-          <div class="card" data-state="working"><span class="dot"></span><b>Write the token tests</b><span class="card-meta"><span class="card-state"></span><span>ctx 18%</span></span></div>
-        </div>
-        <div class="board-foot">
-          <span><kbd>p</kbd> new task</span>
-          <span class="hint-jump"><kbd>;</kbd> next that needs you</span>
-          <span class="board-limits">5h 23%&nbsp;&nbsp;wk 41%</span>
-        </div>
+      <div class="os-pick">
+        <a class="os-btn" href="#install" data-os-link="macos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.62-1.7-3.19-1.72-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.63 1.11 8.8.73 1.06 1.6 2.25 2.75 2.2 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.71.71 2.88.69 1.19-.02 1.94-1.08 2.67-2.14.84-1.23 1.19-2.42 1.2-2.48-.03-.01-2.3-.88-2.32-3.5ZM14.17 6.14c.61-.74 1.02-1.76.91-2.78-.88.04-1.94.59-2.57 1.32-.56.65-1.06 1.69-.93 2.69.98.08 1.98-.5 2.59-1.23Z"/></svg>
+          macOS
+        </a>
+        <a class="os-btn" href="#install" data-os-link="linux">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c-2.2 0-3.6 1.9-3.6 4.6 0 1.3.3 2.2-.3 3.3-.7 1.2-2.4 2.9-2.8 5.2-.2 1.1.1 1.8.6 2.2-.4.6-.6 1.3-.2 1.9.6.9 2.2.7 3.6 1.3 1 .4 1.9.6 2.7.2.8.4 1.7.2 2.7-.2 1.4-.6 3-.4 3.6-1.3.4-.6.2-1.3-.2-1.9.5-.4.8-1.1.6-2.2-.4-2.3-2.1-4-2.8-5.2-.6-1.1-.3-2-.3-3.3C15.6 3.9 14.2 2 12 2Zm-1.4 4.2c.4 0 .7.5.7 1.1s-.3 1.1-.7 1.1-.7-.5-.7-1.1.3-1.1.7-1.1Zm2.8 0c.4 0 .7.5.7 1.1s-.3 1.1-.7 1.1-.7-.5-.7-1.1.3-1.1.7-1.1ZM12 9.3c.9 0 2 .5 2 .9s-1.1 1.1-2 1.1-2-.7-2-1.1.9-.9 2-.9Z"/></svg>
+          Linux
+        </a>
+        <a class="os-btn os-btn-quiet" href="/docs/guide/">Read the docs</a>
       </div>
+      <p class="cmd-note">Windows runs it inside WSL2. Full steps per system are in the <a href="#install">install guide</a>.</p>
     </div>
 
     <div class="wrap">
